@@ -3,7 +3,7 @@ import MyPosts from './MyPosts/MyPosts';
 import s from './Profile.module.css';
 
 const Profile = () => {
-    return <div className={s.content}>
+    return <div>
     <img src='https://wallpaperaccess.com/full/1131217.jpg' alt=''></img>
     <div>ava</div>
     <MyPosts />
