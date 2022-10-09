@@ -1,20 +1,30 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import {addPostActionCreator, updataNewPostTextActionCreator} from '../../../redux/state';
+
+/*const addPostActionCreator = () => {
+  return {
+    type: 'ADD-POST'
+  }
+}
+const updataNewPostTextActionCreator = (text) => {
+  return {
+    type: 'UPDATA-NEW-POST-TEXT', newText: text
+  }
+} перенесено в state*/
 
 const MyPosts = (props) => {
   let postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} />)
   
   let newPostElement = React.createRef();
   let addPost = () => {
-    //props.addPost(); эта строка заменена строкой ниже
-    props.dispatch({type: 'ADD-POST'});
+    props.dispatch( addPostActionCreator() );
   };
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    //props.updataNewPostText(text);  эта строка заменена строкой ниже
-    props.dispatch({type: 'UPDATA-NEW-POST-TEXT', newText: text});
+    props.dispatch( updataNewPostTextActionCreator(text) );
   };
   
   return (

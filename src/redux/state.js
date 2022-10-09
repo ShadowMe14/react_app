@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST';
+const UPDATA_NEW_POST_TEXT = 'UPDATA-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATA_NEW_MESSAGE_TEXT = 'UPDATA-NEW-MESSAGE-TEXT';
+
 let store = {
   _state: {
     dialogsPage: {
@@ -40,17 +45,16 @@ let store = {
   },
 
   dispatch (action) {
-    if (action.type === 'ADD-POST') {
+    if (action.type === ADD_POST) {
       let newPost = {
         id: 4, 
         message: this._state.profilePage.newPostText, 
         likesCount: 0,
       };
       this._state.profilePage.posts.push(newPost);
-      //обнуляет textarea после нажатия на button
       this._state.profilePage.newPostText = '';
       this._rerenderEntireFree(this._state);
-    } else if (action.type === 'UPDATA-NEW-POST-TEXT') {
+    } else if (action.type === UPDATA_NEW_POST_TEXT) {
         this._state.profilePage.newPostText = action.newText;
         this._rerenderEntireFree(this._state);
     } else if (action.type === 'ADD-MESSAGE') {
@@ -65,22 +69,15 @@ let store = {
         this._rerenderEntireFree(this._state);
     }
   },
-
-  /* перенесено в dispatch
-  addMessage () {
-    let newMassege = {
-        id: 7, massege: this._state.dialogsPage.newMassegeText, 
-    };
-    this._state.dialogsPage.masseges.push(newMassege);
-    this._state.dialogsPage.newMassegeText = '';
-    this._rerenderEntireFree(this._state);
-  },
-  updataNewMessageText (newTextM) {
-    this._state.dialogsPage.newMassegeText = newTextM;
-    this._rerenderEntireFree(this._state);
-  },*/
-  
 }
+
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const updataNewPostTextActionCreator = (text) => 
+  ({type: UPDATA_NEW_POST_TEXT, newText: text})
+
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
+export const updataNewMessageTextActionCreator = (text) => 
+  ({type: UPDATA_NEW_MESSAGE_TEXT, newTextM: text})
 
   export default store;
   window.store = store;
