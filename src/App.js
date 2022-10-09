@@ -25,13 +25,12 @@ const App = (props) => {
         <Routes>
             <Route path="/profile/*" element={<Profile 
             state={props.state.profilePage} 
-            addPost={props.addPost} 
-            updataNewPostText={props.updataNewPostText} />} />
+            dispatch={props.dispatch} />} />
             <Route path="/dialogs/*" element={<Dialogs 
             state={props.state.dialogsPage} 
-            addMessage={props.addMessage}
+            dispatch={props.dispatch}
             newMassegeText={props.state.dialogsPage.newMassegeText}
-            updataNewMessageText={props.updataNewMessageText} />} />
+             />} />
             {/*<Route path="/dialogs/*" element={<Dialogs {...props} />} /> - если бы пропсы приходили только в Dialogs*/}
             <Route path="/news/*" element={<News />} />
             <Route path="/music/*" element={<Music />} />

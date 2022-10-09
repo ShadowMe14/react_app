@@ -1,8 +1,5 @@
-let rerenderEntireFree = () => {
-  console.log('state changed')
-};
-
-let state = {
+let store = {
+  _state: {
     dialogsPage: {
         dialogs: [
             {id: 1, name: 'Dima'},
@@ -30,42 +27,62 @@ let state = {
           ],
         newPostText: 'it-kamasutra.com',
     }
+  },
+  _rerenderEntireFree () {
+    console.log('state changed')
+    },
+
+  getState () {
+    return this._state;
+  },
+  subscribe (observer) {
+    this._rerenderEntireFree = observer; //observer - патерн????...
+  },
+
+  dispatch (action) {
+    if (action.type === 'ADD-POST') {
+      let newPost = {
+        id: 4, 
+        message: this._state.profilePage.newPostText, 
+        likesCount: 0,
+      };
+      this._state.profilePage.posts.push(newPost);
+      //обнуляет textarea после нажатия на button
+      this._state.profilePage.newPostText = '';
+      this._rerenderEntireFree(this._state);
+    } else if (action.type === 'UPDATA-NEW-POST-TEXT') {
+        this._state.profilePage.newPostText = action.newText;
+        this._rerenderEntireFree(this._state);
+    } else if (action.type === 'ADD-MESSAGE') {
+      let newMassege = {
+        id: 7, massege: this._state.dialogsPage.newMassegeText, 
+      };
+      this._state.dialogsPage.masseges.push(newMassege);
+      this._state.dialogsPage.newMassegeText = '';
+      this._rerenderEntireFree(this._state);
+      } else if (action.type === 'UPDATA-NEW-MESSAGE-TEXT') {
+        this._state.dialogsPage.newMassegeText = action.newTextM;
+        this._rerenderEntireFree(this._state);
+    }
+  },
+
+  /* перенесено в dispatch
+  addMessage () {
+    let newMassege = {
+        id: 7, massege: this._state.dialogsPage.newMassegeText, 
+    };
+    this._state.dialogsPage.masseges.push(newMassege);
+    this._state.dialogsPage.newMassegeText = '';
+    this._rerenderEntireFree(this._state);
+  },
+  updataNewMessageText (newTextM) {
+    this._state.dialogsPage.newMassegeText = newTextM;
+    this._rerenderEntireFree(this._state);
+  },*/
+  
 }
 
-export let addPost = () => {
-          let newPost = {
-            id: 4, 
-            message: state.profilePage.newPostText, 
-            likesCount: 0,
-          };
-          state.profilePage.posts.push(newPost);
-          //обнуляет textarea после нажатия на button
-          state.profilePage.newPostText = '';
-          rerenderEntireFree();
-        }
-
-export let updataNewPostText = (newText) => {
-          state.profilePage.newPostText = newText;
-          rerenderEntireFree();
-        }
-
-export let addMessage = () => {
-          let newMassege = {
-              id: 7, massege: state.dialogsPage.newMassegeText, 
-          };
-          state.dialogsPage.masseges.push(newMassege);
-          state.dialogsPage.newMassegeText = '';
-          rerenderEntireFree();
-        }
-
-export let updataNewMessageText = (newTextM) => {
-          state.dialogsPage.newMassegeText = newTextM;
-          rerenderEntireFree();
-}
-
-export const subscribe = (observer) => {
-  rerenderEntireFree = observer; //observer - патерн????...
-}
-  export default state;
+  export default store;
+  window.store = store;
 
   

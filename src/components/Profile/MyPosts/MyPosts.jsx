@@ -7,12 +7,14 @@ const MyPosts = (props) => {
   
   let newPostElement = React.createRef();
   let addPost = () => {
-    props.addPost();
+    //props.addPost(); эта строка заменена строкой ниже
+    props.dispatch({type: 'ADD-POST'});
   };
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.updataNewPostText(text);
+    //props.updataNewPostText(text);  эта строка заменена строкой ниже
+    props.dispatch({type: 'UPDATA-NEW-POST-TEXT', newText: text});
   };
   
   return (
