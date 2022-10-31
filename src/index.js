@@ -11,17 +11,17 @@ let rerenderEntireFree = (state) => {
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-       <App state={state} 
-       dispatch={store.dispatch.bind(store)} 
+        <App
+          state={state} 
+          dispatch={store.dispatch.bind(store)}
         />
       </BrowserRouter>
     </React.StrictMode>
   );
-}
+};
 rerenderEntireFree(store.getState());
 
 store.subscribe(rerenderEntireFree);
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

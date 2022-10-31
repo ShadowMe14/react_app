@@ -9,9 +9,8 @@ import News from './components/News/News';
 import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
 
-
 const App = (props) => {
- /* 
+  /* 
   1.  const d = props.dialogs;
       const m = props.masseges;
       или
@@ -23,18 +22,38 @@ const App = (props) => {
       <Navbar />
       <div className="app-wrapper-content">
         <Routes>
-            <Route path="/profile/*" element={<Profile 
-            state={props.state.profilePage} 
-            dispatch={props.dispatch} />} />
-            <Route path="/dialogs/*" element={<Dialogs 
-            state={props.state.dialogsPage} 
-            dispatch={props.dispatch}
-            newMassegeText={props.state.dialogsPage.newMassegeText}
-             />} />
-            {/*<Route path="/dialogs/*" element={<Dialogs {...props} />} /> - если бы пропсы приходили только в Dialogs*/}
-            <Route path="/news/*" element={<News />} />
-            <Route path="/music/*" element={<Music />} />
-            <Route path="/setting/*" element={<Settings />} />
+          <Route
+            path="/profile/*"
+            element={
+              <Profile
+                state={props.state.profilePage}
+                dispatch={props.dispatch}
+              />
+            }
+          />
+          <Route
+            path="/dialogs/*"
+            element={
+              <Dialogs
+                state={props.state.dialogsPage}
+                dispatch={props.dispatch}
+                newMassegeText={props.state.dialogsPage.newMassegeText}
+              />
+            }
+          />
+          {/*<Route path="/dialogs/*" element={<Dialogs {...props} />} /> - если бы пропсы приходили только в Dialogs*/}
+          <Route
+            path="/news/*"
+            element={<News />}
+          />
+          <Route
+            path="/music/*"
+            element={<Music />}
+          />
+          <Route
+            path="/setting/*"
+            element={<Settings />}
+          />
         </Routes>
       </div>
     </div>
